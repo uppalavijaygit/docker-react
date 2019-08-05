@@ -4,3 +4,14 @@ services:
     - docker
 before_install:
     - docker build -t uppalavijay/frountend:latest -f Dockerfile.dev .
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-1"
+    app: docker-reeact
+    env: DockerReeact-env
+    bucket_name: docker-reeact
+    on:
+      branch: master
+      access_key_id: "$AWS_ACCESS_KEY"
+      secret_access_key:
+        secure: "$AWS_SECRET_KEY"
